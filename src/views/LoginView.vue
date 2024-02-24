@@ -15,7 +15,7 @@
 
 <script setup>
 import { reactive } from 'vue';
-import { LoginAccount } from '@/apis/login';
+import { LoginAccount } from '@/apis/account';
 
 const loginInfo = reactive({
   username: '',
@@ -24,8 +24,9 @@ const loginInfo = reactive({
 
 const login = () => {
   LoginAccount(loginInfo).then((res) => {
-    const { token } = res;
+    const { token, tokenHead } = res;
     localStorage.setItem('token', token);
+    localStorage.setItem('tokenHead', tokenHead);
   });
 };
 </script>
