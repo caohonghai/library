@@ -8,7 +8,7 @@ const request = axios.create({
 
 request.interceptors.request.use(
     (config) => {
-        config.headers['token'] = localStorage.getItem('token') || ''
+        config.headers['Authorization'] = localStorage.getItem('token') || ''
         return config
     },
     (error) => {
