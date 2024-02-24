@@ -8,7 +8,9 @@
       <el-form-item label="密码">
         <el-input type="password" v-model="loginInfo.password" placeholder="请输入密码" />
       </el-form-item>
-      <el-button type="primary" @click="login">登入</el-button>
+      <div class="flex justify-center mt-6">
+        <el-button class="w-full" type="primary" @click="login">登入</el-button>
+      </div>
     </el-form>
   </div>
 </template>
@@ -16,6 +18,8 @@
 <script setup>
 import { reactive } from 'vue';
 import { LoginAccount } from '@/apis/account';
+import { ElMessage } from 'element-plus';
+import router from '@/router';
 
 const loginInfo = reactive({
   username: '',
@@ -27,6 +31,12 @@ const login = () => {
     const { token, tokenHead } = res;
     localStorage.setItem('token', token);
     localStorage.setItem('tokenHead', tokenHead);
+    ElMessage({
+      showClose: true,
+      message: '登录成功',
+      type: 'success',
+    });
+    router.push('/dashboard');
   });
 };
 </script>

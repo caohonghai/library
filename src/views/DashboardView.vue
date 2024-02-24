@@ -14,8 +14,20 @@
 
 <script setup>
 import AsideMenu from '@/components/AsideMenu.vue';
+import { logoutAccount } from '@/apis/account';
+import { ElMessage } from 'element-plus';
+import router from '@/router';
 
 const logout = () => {
-  console.log('logout');
+  logoutAccount().then(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('tokenHead');
+    ElMessage({
+      showClose: true,
+      message: '退出登录成功',
+      type: 'success',
+    });
+    router.push('/');
+  });
 };
 </script>

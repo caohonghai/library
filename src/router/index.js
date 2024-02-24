@@ -44,6 +44,37 @@ const router = createRouter({
           },
           component: () => import('../views/Dashboard/BookManage/QueryBookView.vue')
         }]
+      },
+      {
+        path: '/dashboard/userManage',
+        name: 'userManage',
+        meta: {
+          title: '用户管理',
+        },
+        redirect: '/dashboard/userManage/addUser',
+        children: [{
+          path: '/dashboard/userManage/addUser',
+          name: 'addUser',
+          meta: {
+            title: '添加用户',
+          },
+          component: () => import('../views/Dashboard/UserManage/AddUserView.vue')
+        }, {
+          path: '/dashboard/userManage/queryUser',
+          name: 'queryUser',
+          meta: {
+            title: '查询用户',
+          },
+          component: () => import('../views/Dashboard/UserManage/QueryUserView.vue')
+        }]
+      },
+      {
+        path: '/dashboard/borrowInfo',
+        name: 'borrowInfo',
+        meta: {
+          title: '借阅管理',
+        },
+        component: () => import('../views/Dashboard/BorrowInfoView.vue')
       }, {
         path: '/dashboard/profile',
         name: 'profile',
@@ -52,16 +83,21 @@ const router = createRouter({
         },
         component: () => import('../views/Dashboard/ProfileView.vue')
       }]
-    }
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
+    },
+
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+  if (to.path === '/' && token) {
+    next('/dashboard')
+  } else if (to.path !== '/' && !token) {
+    next('/')
+  } else {
+    next()
+  }
+})
+
 
 export default router
