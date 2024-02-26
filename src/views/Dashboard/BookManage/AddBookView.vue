@@ -1,7 +1,9 @@
 <template>
   <div class="flex justify-center">
     <div class="border w-full lg:w-1/3 p-4 rounded-sm">
-      <h1 class="text-xl text-gray-700 text-center">添加书籍</h1>
+      <h1 class="text-xl text-gray-700 text-center">
+        添加书籍
+      </h1>
       <el-form
         ref="bookForm"
         v-loading="loading"
@@ -11,16 +13,30 @@
         label-width="80px"
       >
         <el-form-item label="书名" prop="bookName">
-          <el-input v-model="bookInfo.bookName" placeholder="请输入书名" />
+          <el-input
+            v-model="bookInfo.bookName"
+            placeholder="请输入书名"
+          />
         </el-form-item>
         <el-form-item label="作者" prop="bookAuthor">
-          <el-input v-model="bookInfo.bookAuthor" placeholder="请输入作者" />
+          <el-input
+            v-model="bookInfo.bookAuthor"
+            placeholder="请输入作者"
+          />
         </el-form-item>
         <el-form-item label="出版社" prop="bookPublish">
-          <el-input v-model="bookInfo.bookPublish" placeholder="请输入出版社" />
+          <el-input
+            v-model="bookInfo.bookPublish"
+            placeholder="请输入出版社"
+          />
         </el-form-item>
         <el-form-item label="类别" prop="bookCategory">
-          <el-select v-model="bookInfo.bookCategory" clearable filterable placeholder="请选择类别">
+          <el-select
+            v-model="bookInfo.bookCategory"
+            clearable
+            filterable
+            placeholder="请选择类别"
+          >
             <el-option
               v-for="item in allTags"
               :key="item.categoryId"
@@ -30,7 +46,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="价格" prop="bookPrice">
-          <el-input v-model.number="bookInfo.bookPrice" placeholder="请输入价格" />
+          <el-input
+            v-model.number="bookInfo.bookPrice"
+            placeholder="请输入价格"
+          />
         </el-form-item>
         <el-form-item label="简介" prop="bookIntroduction">
           <el-input
@@ -42,8 +61,15 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit(bookForm)">新建</el-button>
-          <el-button @click="onReset(bookForm)">重置</el-button>
+          <el-button
+            type="primary"
+            @click="onSubmit(bookForm)"
+          >
+            新建
+          </el-button>
+          <el-button @click="onReset(bookForm)">
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -56,19 +82,17 @@ import { getAllCategory } from '@/apis/category';
 import { addBookPromise } from '@/apis/book';
 import { ElMessage } from 'element-plus';
 
-const loading = ref(false);
-const allTags = ref([]);
+// ref
 const bookForm = ref();
-const bookInfo = reactive({
-  bookName: '',
-  bookAuthor: '',
-  bookPublish: '',
-  bookCategory: '',
-  bookIntroduction: '',
-  bookPrice: '',
-});
+// 表单规则
 const rules = reactive({
-  bookName: [{ required: true, message: '书名不能为空', trigger: 'blur' }],
+  bookName: [
+    {
+      required: true,
+      message: '书名不能为空',
+      trigger: 'blur',
+    },
+  ],
   bookAuthor: [
     {
       required: true,
@@ -119,13 +143,21 @@ const rules = reactive({
       trigger: 'blur',
     },
   ],
-  desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
+  desc: [
+    {
+      required: true,
+      message: 'Please input activity form',
+      trigger: 'blur',
+    },
+  ],
 });
 
 onMounted(() => {
   getAllTags();
 });
 
+const loading = ref(false);
+const allTags = ref([]);
 // 获取所有标签
 const getAllTags = () => {
   loading.value = true;
@@ -138,6 +170,14 @@ const getAllTags = () => {
     });
 };
 
+const bookInfo = reactive({
+  bookName: '',
+  bookAuthor: '',
+  bookPublish: '',
+  bookCategory: '',
+  bookIntroduction: '',
+  bookPrice: '',
+});
 // 提交表单
 const onSubmit = async (form) => {
   if (!form) return;
