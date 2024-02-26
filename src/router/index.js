@@ -14,8 +14,17 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardView,
-      redirect: '/dashboard/bookManage',
+      redirect: '/dashboard/home',
       children: [
+        {
+          path: '/dashboard/home',
+          name: 'home',
+          meta: {
+            title: '首页',
+          },
+          component: () =>
+            import('../views/Dashboard/HomeView.vue'),
+        },
         {
           path: '/dashboard/bookManage',
           name: 'bookManage',

@@ -3,7 +3,7 @@
     <el-menu
       class="h-screen"
       :default-openeds="['/dashboard/bookManage']"
-      default-active="/dashboard/bookManage/addBook"
+      :default-active="currentRoute"
       router
     >
       <template v-for="(menu, idx) in routes" :key="idx">
@@ -39,4 +39,5 @@ import { ref } from 'vue';
 
 // 拿到 router 那边的信息 生成侧边栏
 const routes = ref(router.options.routes[1].children);
+const currentRoute = ref(router.currentRoute.value.path);
 </script>
