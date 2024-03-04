@@ -28,6 +28,13 @@
         >
           登入
         </el-button>
+        <el-button
+          class="w-full"
+          type="default"
+          @click="register"
+        >
+          注册
+        </el-button>
       </div>
     </el-form>
   </div>
@@ -56,5 +63,10 @@ const login = () => {
     });
     router.push('/dashboard');
   });
+};
+
+const register = () => {
+  console.log(1);
+  router.push('/register');
 };
 </script>

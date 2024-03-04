@@ -38,6 +38,12 @@ import router from '@/router';
 import { ref } from 'vue';
 
 // 拿到 router 那边的信息 生成侧边栏
-const routes = ref(router.options.routes[1].children);
+const routers = router.options.routes;
+const routes = ref();
+routers.forEach((route) => {
+  if (route.children) {
+    routes.value = route.children;
+  }
+});
 const currentRoute = ref(router.currentRoute.value.path);
 </script>
